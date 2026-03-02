@@ -9,7 +9,7 @@ $(document).ready(function() {
         $.ajax({
             url: '/upload',
             type: 'post',
-            data: $(this).serialize(),
+            data: $(this).serialize() + '&userhash=' + encodeURIComponent(localStorage.getItem('catbox_userhash') || ''),
             dataType: 'json',
             success: function(data) {
                 // Hide the spinning SVG
