@@ -4,30 +4,38 @@ $(document).ready(function() {
 
         // Show the spinning SVG
         $('#loading-svg').show();
+        $('#result').empty();
 
         $.ajax({
             url: '/upload',
             type: 'post',
             data: $(this).serialize(),
+            dataType: 'json',
             success: function(data) {
                 // Hide the spinning SVG
                 $('#loading-svg').hide();
 
-                // Display the result
-                $('#result').html('<input id="upload-url" type="text" class="form-control" value="' + data + '" readonly onclick="this.select();">').hide().fadeIn();
+                // Build the result input safely using DOM methods
+                var input = $('<input>', {
+                    id: 'upload-url',
+                    type: 'text',
+                    class: 'form-control',
+                    readonly: true,
+                    value: data.url
+                }).on('click', function() {
+                    this.select();
+                    document.execCommand('copy');
+                });
+
+                $('#result').hide().empty().append(input).fadeIn();
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 // Hide the spinning SVG
                 $('#loading-svg').hide();
 
-                // Display the error message
-                $('#result').text('Error: ' + errorThrown);
+                var errMsg = jqXHR.responseText || errorThrown;
+                $('#result').text('Error: ' + errMsg);
             }
         });
-    });
-
-    $(document).on('click', '#upload-url', function() {
-        this.select();
-        document.execCommand('copy');
     });
 });
