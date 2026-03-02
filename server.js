@@ -11,33 +11,27 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 
 app.post("/upload", async (req, res) => {
-  const { imageUrl, secret } = req.body;
+  const { imageUrl } = req.body;
+
+  if (!imageUrl) {
+    return res.status(400).send("No image URL provided.");
+  }
 
   try {
     const form = new FormData();
-
-    if (imageUrl) {
-      // If an image URL is provided, use it
-      form.append("url", imageUrl);
-    } else {
-      return res.status(400).send("No image URL provided.");
-    }
-
-    if (secret) {
-      form.append("secret", secret);
-    }
+    form.append("reqtype", "urlupload");
+    form.append("url", imageUrl);
 
     const uploadResponse = await axios({
       method: "POST",
-      url: "https://envs.sh",
+      url: "https://catbox.moe/user/api.php",
       data: form,
       headers: form.getHeaders(),
     });
 
-    console.log("Upload Response:", uploadResponse.data); // Log the response from the upload
+    console.log("Upload Response:", uploadResponse.data);
     res.send(uploadResponse.data);
   } catch (error) {
-    // Log detailed error information
     console.error("Error during upload:", {
       message: error.message,
       response: error.response ? error.response.data : "No response data",
