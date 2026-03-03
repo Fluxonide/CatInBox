@@ -1,6 +1,6 @@
 {
-    "name": "envs-sh",
-    "version": "2.0.0",
+    "name": "CatInBox",
+    "version": "1.0.0",
     "description": "Upload files to catbox.moe — TypeScript + React",
     "main": "dist/server.js",
     "scripts": {
