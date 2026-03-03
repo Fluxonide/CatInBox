@@ -43,8 +43,8 @@ export default function UploadHistory({ history, onClear }: Props) {
                 {history.map((item, i) => (
                     <div key={`${item.timestamp}-${i}`} className="history-item glass-card">
                         <div className="history-item-info">
-                            <span className="history-filename" title={item.filename}>
-                                {item.filename}
+                            <span className="history-filename" title={item.url}>
+                                {item.url}
                             </span>
                             <span className="history-meta">
                                 {item.size ? formatSize(item.size) + " · " : ""}
