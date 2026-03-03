@@ -1,7 +1,23 @@
-.vercel
+# Dependencies
 node_modules/
-dist/
 client/node_modules/
-client/dist/
+
+# Build output
+dist/
+public/
+
+# Vercel
+.vercel
+
+# TypeScript build artifacts
 *.js.map
 *.d.ts
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+*.swp
+*.swo
