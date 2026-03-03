@@ -1,28 +1,20 @@
 {
   "version": 2,
-  "builds": [
+  "outputDirectory": "public",
+  "buildCommand": "npx tsc && cd client && npm install && npm run build",
+  "installCommand": "npm install",
+  "rewrites": [
     {
-      "src": "dist/server.js",
-      "use": "@vercel/node",
-      "config": {
-        "includeFiles": [
-          "public/**"
-        ]
-      }
-    }
-  ],
-  "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "dist/server.js"
+      "source": "/api/(.*)",
+      "destination": "/api"
     },
     {
-      "src": "/upload",
-      "dest": "dist/server.js"
+      "source": "/upload",
+      "destination": "/api"
     },
     {
-      "src": "/(.*)",
-      "dest": "dist/server.js"
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ]
 }
