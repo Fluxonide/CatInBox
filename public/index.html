@@ -2,34 +2,20 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-  <link href="styles.css" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet" />
-
-  <title>Catbox.moe Uploader</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description"
+        content="Upload files to Catbox.moe with a modern, beautiful interface. Fast, free, and easy file hosting." />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <title>envs.sh — Catbox Uploader</title>
+  <script type="module" crossorigin src="/assets/index-D2z59Ck2.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-CFL8swKV.css">
 </head>
 
 <body>
-  <div class="container">
-    <h2 class="mt-5">Upload to Catbox.moe</h2>
-    <form id="upload-form" action="/upload" method="post" class="mt-4">
-      <div class="form-group">
-        <input type="text" class="form-control" name="imageUrl" placeholder="Enter direct image URL ≤ 5MB" />
-      </div>
-      <input type="submit" class="btn btn-primary" value="Upload" />
-      <object id="loading-svg" class="spin" data="spin.svg" style="display: none">
-        Your browser does not support SVG
-      </object>
-      <div id="result" class="mt-4"></div>
-    </form>
-  </div>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
-  <script src="script.js"></script>
+    <div id="root"></div>
 </body>
 
 </html>

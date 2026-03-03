@@ -1,1 +1,7 @@
 .vercel
+node_modules/
+dist/
+client/node_modules/
+client/dist/
+*.js.map
+*.d.ts
