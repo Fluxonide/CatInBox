@@ -414,25 +414,31 @@ export default function Upload() {
                             onClick={(e) => (e.target as HTMLInputElement).select()}
                         />
                         <button
-                            className={`copy-btn ${copied ? "copied" : ""}`}
+                            className={`copy-btn icon-btn ${copied ? "copied" : ""}`}
                             onClick={handleCopy}
+                            title={copied ? "Copied!" : "Copy URL"}
                         >
                             {copied ? (
-                                <>
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                                        <polyline points="20 6 9 17 4 12" />
-                                    </svg>
-                                    Copied!
-                                </>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                    <polyline points="20 6 9 17 4 12" />
+                                </svg>
                             ) : (
-                                <>
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
-                                        <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" />
-                                    </svg>
-                                    Copy
-                                </>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+                                    <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" />
+                                </svg>
                             )}
+                        </button>
+                        <button
+                            className="copy-btn icon-btn"
+                            onClick={() => window.open(result.url, "_blank", "noopener,noreferrer")}
+                            title="Open in new tab"
+                        >
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" />
+                                <polyline points="15 3 21 3 21 9" />
+                                <line x1="10" y1="14" x2="21" y2="3" />
+                            </svg>
                         </button>
                     </div>
                 </div>
@@ -505,25 +511,31 @@ export default function Upload() {
                                             onClick={(e) => (e.target as HTMLInputElement).select()}
                                         />
                                         <button
-                                            className={`copy-btn ${resizeCopied ? "copied" : ""}`}
+                                            className={`copy-btn icon-btn ${resizeCopied ? "copied" : ""}`}
                                             onClick={copyResizedUrl}
+                                            title={resizeCopied ? "Copied!" : "Copy resized URL"}
                                         >
                                             {resizeCopied ? (
-                                                <>
-                                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                                                        <polyline points="20 6 9 17 4 12" />
-                                                    </svg>
-                                                    Copied!
-                                                </>
+                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                                    <polyline points="20 6 9 17 4 12" />
+                                                </svg>
                                             ) : (
-                                                <>
-                                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
-                                                        <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" />
-                                                    </svg>
-                                                    Copy Resized URL
-                                                </>
+                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+                                                    <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" />
+                                                </svg>
                                             )}
+                                        </button>
+                                        <button
+                                            className="copy-btn icon-btn"
+                                            onClick={() => window.open(buildWeservUrl(result.url, resizeWidth, resizeHeight), "_blank", "noopener,noreferrer")}
+                                            title="Open in new tab"
+                                        >
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" />
+                                                <polyline points="15 3 21 3 21 9" />
+                                                <line x1="10" y1="14" x2="21" y2="3" />
+                                            </svg>
                                         </button>
                                     </div>
                                 </>
