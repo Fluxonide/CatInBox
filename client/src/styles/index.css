@@ -512,6 +512,11 @@ a:hover {
     border-color: rgba(74, 222, 128, 0.3);
 }
 
+.copy-btn.icon-btn {
+    padding: 12px;
+    gap: 0;
+}
+
 /* --- Error --- */
 .error-card {
     display: flex;
