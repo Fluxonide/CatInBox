@@ -392,7 +392,13 @@ export default function Upload() {
                 <div className="result-card glass-card success-glow">
                     <div className="result-header">
                         <span className="result-check">✓</span>
-                        <span>Uploaded successfully!</span>
+                        <div className="result-header-info">
+                            <span>Uploaded successfully!</span>
+                            <span className="result-meta">
+                                {result.filename}
+                                {result.size ? ` · ${formatSize(result.size)}` : ""}
+                            </span>
+                        </div>
                     </div>
                     <div className="result-url-row">
                         <input
