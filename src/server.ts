@@ -95,7 +95,10 @@ app.post("/api/upload/url", async (req: Request, res: Response): Promise<void> =
 
         const resultUrl = String(uploadResponse.data).trim();
         console.log("Upload Response:", resultUrl);
-        const result: UploadResult = { url: resultUrl, filename, size: undefined };
+        // Get file size from content-length header of the downloaded file
+        const contentLength = downloadResponse.headers["content-length"];
+        const size = contentLength ? parseInt(contentLength, 10) : undefined;
+        const result: UploadResult = { url: resultUrl, filename, size };
         res.json(result);
     } catch (error: unknown) {
         const err = error as { message: string; response?: { data: unknown }; stack?: string };
