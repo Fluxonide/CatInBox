@@ -404,6 +404,17 @@ export default function Upload() {
                             </span>
                         </div>
                     </div>
+                    {isImageUrl(result.url) && (
+                        <div className="result-thumbnail">
+                            <img
+                                src={result.url}
+                                alt={result.filename}
+                                onError={(e) => {
+                                    (e.target as HTMLImageElement).parentElement!.style.display = "none";
+                                }}
+                            />
+                        </div>
+                    )}
                     <div className="result-url-row">
                         <input
                             id="result-url"
