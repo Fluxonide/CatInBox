@@ -4,6 +4,7 @@ import FormData from "form-data";
 import cors from "cors";
 import multer from "multer";
 import path from "path";
+import { getHistory, addToHistory, removeFromHistory, clearHistory } from "./history";
 
 const app = express();
 const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 200 * 1024 * 1024 } });
@@ -345,6 +346,12 @@ app.post("/upload", async (req: Request, res: Response): Promise<void> => {
         res.status(500).send(`Error: ${err.message}`);
     }
 });
+
+// History API routes
+app.get("/api/history", getHistory);
+app.post("/api/history", addToHistory);
+app.delete("/api/history/:url", removeFromHistory);
+app.delete("/api/history", clearHistory);
 
 // SPA fallback — serve index.html for all non-API routes
 app.get("*", (_req: Request, res: Response) => {
