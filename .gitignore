@@ -27,3 +27,4 @@ Thumbs.db
 *.swp
 *.swo
 public/index.html
+.env*.local
