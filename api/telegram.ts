@@ -5,6 +5,7 @@ import FormData from "form-data";
 
 const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN || "";
 const bot = new TelegramBot(BOT_TOKEN);
+const ALLOWED_USER_ID = 1328917774;
 
 interface TelegramUpdate {
   message?: {
@@ -75,6 +76,12 @@ export default async function handler(
 
     const chatId = update.message.chat.id;
 
+    // Only allow specific user
+    if (chatId !== ALLOWED_USER_ID) {
+      res.status(200).json({ ok: true });
+      return;
+    }
+
     // Handle text messages
     if (update.message.text) {
       const text = update.message.text;
@@ -86,8 +93,6 @@ export default async function handler(
         );
       } else if (text.startsWith("http://") || text.startsWith("https://")) {
         // Handle URL upload
-        await bot.sendMessage(chatId, "Downloading and uploading your file...");
-
         try {
           const downloadResponse = await axios({
             method: "GET",
@@ -101,10 +106,9 @@ export default async function handler(
           const filename = urlPath.split("/").pop() || "file";
 
           const catboxUrl = await uploadToCatbox(buffer, filename);
-          await bot.sendMessage(
-            chatId,
-            `✅ Uploaded successfully!\n\n${catboxUrl}`,
-          );
+          await bot.sendMessage(chatId, `[‎](${catboxUrl})\`${catboxUrl}\``, {
+            parse_mode: "Markdown",
+          });
         } catch (error) {
           await bot.sendMessage(
             chatId,
@@ -121,8 +125,6 @@ export default async function handler(
 
     // Handle photo uploads
     if (update.message.photo && update.message.photo.length > 0) {
-      await bot.sendMessage(chatId, "Uploading your photo...");
-
       try {
         const photo = update.message.photo[update.message.photo.length - 1];
         const file = await bot.getFile(photo.file_id);
@@ -138,7 +140,9 @@ export default async function handler(
         const filename = file.file_path?.split("/").pop() || "photo.jpg";
 
         const catboxUrl = await uploadToCatbox(buffer, filename);
-        await bot.sendMessage(chatId, `✅ Photo uploaded!\n\n${catboxUrl}`);
+        await bot.sendMessage(chatId, `[‎](${catboxUrl})\`${catboxUrl}\``, {
+          parse_mode: "Markdown",
+        });
       } catch (error) {
         await bot.sendMessage(chatId, `❌ Error: ${(error as Error).message}`);
       }
@@ -146,8 +150,6 @@ export default async function handler(
 
     // Handle document/video uploads
     if (update.message.document || update.message.video) {
-      await bot.sendMessage(chatId, "Uploading your file...");
-
       try {
         const fileData = update.message.document || update.message.video;
         const file = await bot.getFile(fileData!.file_id);
@@ -164,7 +166,9 @@ export default async function handler(
           fileData!.file_name || file.file_path?.split("/").pop() || "file";
 
         const catboxUrl = await uploadToCatbox(buffer, filename);
-        await bot.sendMessage(chatId, `✅ File uploaded!\n\n${catboxUrl}`);
+        await bot.sendMessage(chatId, `[‎](${catboxUrl})\`${catboxUrl}\``, {
+          parse_mode: "Markdown",
+        });
       } catch (error) {
         await bot.sendMessage(chatId, `❌ Error: ${(error as Error).message}`);
       }
