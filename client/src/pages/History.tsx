@@ -101,7 +101,15 @@ export default function History() {
         setTimeout(() => setCopiedUrl(null), 2000);
     };
 
-    const removeFromHistory = (url: string) => {
+    const removeFromHistory = async (url: string) => {
+        try {
+            await fetch(`/api/history/${encodeURIComponent(url)}`, {
+                method: "DELETE",
+            });
+        } catch (error) {
+            console.error("Failed to remove from server history:", error);
+        }
+        
         const updated = history.filter((h) => h.url !== url);
         setHistory(updated);
         localStorage.setItem("upload_history", JSON.stringify(updated));
@@ -132,7 +140,15 @@ export default function History() {
         }
     };
 
-    const clearHistory = () => {
+    const clearHistory = async () => {
+        try {
+            await fetch("/api/history", {
+                method: "DELETE",
+            });
+        } catch (error) {
+            console.error("Failed to clear server history:", error);
+        }
+        
         setHistory([]);
         localStorage.removeItem("upload_history");
     };
