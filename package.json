@@ -16,11 +16,13 @@
     "node": "20.x"
   },
   "dependencies": {
+    "@types/node-telegram-bot-api": "^0.64.14",
     "axios": "^1.7.0",
     "cors": "^2.8.5",
     "express": "^4.19.2",
     "form-data": "^4.0.0",
-    "multer": "^1.4.5-lts.1"
+    "multer": "^1.4.5-lts.1",
+    "node-telegram-bot-api": "^0.67.0"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
